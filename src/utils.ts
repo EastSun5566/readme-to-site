@@ -1,6 +1,5 @@
 export function generateHtml(content: string, title = "README"): string {
-  return `
-<!DOCTYPE html>
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -108,6 +107,5 @@ export function generateHtml(content: string, title = "README"): string {
 <body>
   ${content}
 </body>
-</html>
-`;
+</html>`;
 }
