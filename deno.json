@@ -1,0 +1,19 @@
+{
+  "name": "@eastsun5566/r2s",
+  "version": "0.0.1",
+  "exports": "./mod.ts",
+  "tasks": {
+    "serve": "deno run --allow-net --allow-read src/serve.ts",
+    "build": "deno run --allow-read --allow-write src/build.ts",
+    "cli": "deno run --allow-net --allow-read --allow-write mod.ts",
+    "test": "deno test --allow-read --allow-write --allow-env"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/cli": "jsr:@std/cli@^1.0.23",
+    "@std/fs": "jsr:@std/fs@^1.0.19",
+    "@std/http": "jsr:@std/http@^1.0.21",
+    "@std/path": "jsr:@std/path@^1.1.2",
+    "marked": "npm:marked@^16.4.1"
+  }
+}
