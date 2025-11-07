@@ -1,6 +1,7 @@
 # README To Site (r2s)
 
-> A simple static site generator that converts README.md to HTML with zero config
+> A simple static site generator that converts README.md to HTML with zero
+> config
 
 ## Installation
 

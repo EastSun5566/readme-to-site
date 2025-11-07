@@ -2,7 +2,7 @@ import { parseArgs } from "@std/cli";
 
 import { build } from "./src/build.ts";
 import { serve } from "./src/serve.ts";
-import denoJson from './deno.json' with { type: "json" };
+import denoJson from "./deno.json" with { type: "json" };
 
 const args = parseArgs(Deno.args, {
   boolean: ["help", "version"],

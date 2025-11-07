@@ -13,7 +13,7 @@ Deno.test("build - should create dist/index.html", async () => {
 
     await Deno.writeTextFile(
       "./README.md",
-      "# Test\n\nThis is a test README."
+      "# Test\n\nThis is a test README.",
     );
 
     await build();
@@ -59,7 +59,7 @@ Deno.test("build - should handle missing README.md", async () => {
       async () => {
         await build();
       },
-      Deno.errors.NotFound
+      Deno.errors.NotFound,
     );
   } finally {
     Deno.chdir(originalDir);
