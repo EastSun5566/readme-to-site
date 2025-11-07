@@ -1,5 +1,7 @@
 # README To Site (r2s)
 
+[![Test](https://img.shields.io/github/actions/workflow/status/EastSun5566/readme-to-site/test.yml?style=social)](https://github.com/EastSun5566/readme-to-site/actions/workflows/test.yml)
+
 > A simple static site generator that converts README.md to HTML
 
 ## Installation
