@@ -67,7 +67,7 @@ async function main() {
   try {
     switch (command) {
       case "serve": {
-        serve(args.port as number, inputFile);
+        serve(inputFile, args.port as number);
         break;
       }
       case "build": {

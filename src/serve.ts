@@ -4,7 +4,7 @@ import { basename } from "@std/path";
 
 import { generateHtml } from "./utils.ts";
 
-export function serve(port = 5566, inputFile = "README.md") {
+export function serve(inputFile = "README.md", port = 5566) {
   const currentDir = Deno.cwd();
   const title = basename(currentDir);
 
