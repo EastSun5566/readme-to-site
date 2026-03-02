@@ -4,18 +4,18 @@ import { basename } from "@std/path";
 
 import { generateHtml } from "./utils.ts";
 
-export function serve(port = 5566) {
+export function serve(inputFile = "README.md", port = 5566) {
   const currentDir = Deno.cwd();
   const title = basename(currentDir);
 
-  console.log("Serving README.md converted result...");
+  console.log(`Serving ${inputFile} converted result...`);
 
   Deno.serve({ port }, async (req) => {
     const url = new URL(req.url);
 
     if (url.pathname === "/" || url.pathname === "/index.html") {
       try {
-        const markdown = await Deno.readTextFile("./README.md");
+        const markdown = await Deno.readTextFile(inputFile);
         const html = await marked.parse(markdown);
         const fullHtml = generateHtml(html, title);
 

@@ -106,3 +106,60 @@ Deno.test("CLI - should parse version flag", () => {
 
   assertEquals(args.version, true);
 });
+
+Deno.test("build - should accept custom input file", async () => {
+  const tempDir = await Deno.makeTempDir();
+  const originalDir = Deno.cwd();
+
+  try {
+    Deno.chdir(tempDir);
+
+    await Deno.writeTextFile(
+      "./ME.md",
+      "# Custom\n\nThis is a custom input file.",
+    );
+
+    await build("ME.md");
+
+    const html = await Deno.readTextFile("./dist/index.html");
+    assertEquals(html.includes("<h1>Custom</h1>"), true);
+    assertEquals(html.includes("This is a custom input file."), true);
+  } finally {
+    Deno.chdir(originalDir);
+    await Deno.remove(tempDir, { recursive: true });
+  }
+});
+
+Deno.test("build - should handle missing custom input file", async () => {
+  const tempDir = await Deno.makeTempDir();
+  const originalDir = Deno.cwd();
+
+  try {
+    Deno.chdir(tempDir);
+
+    await assertRejects(
+      async () => {
+        await build("MISSING.md");
+      },
+      Deno.errors.NotFound,
+    );
+  } finally {
+    Deno.chdir(originalDir);
+    await Deno.remove(tempDir, { recursive: true });
+  }
+});
+
+Deno.test("CLI - should parse custom input file after command", () => {
+  const args = parseArgs(["build", "ME.md"]);
+
+  assertEquals(args._[0], "build");
+  assertEquals(args._[1], "ME.md");
+});
+
+Deno.test("CLI - should parse custom input file for serve with port", () => {
+  const args = parseArgs(["serve", "ME.md", "--port", "3000"]);
+
+  assertEquals(args._[0], "serve");
+  assertEquals(args._[1], "ME.md");
+  assertEquals(args.port, 3000);
+});

@@ -3,9 +3,9 @@ import { ensureDir } from "@std/fs";
 import { basename } from "@std/path";
 import { generateHtml } from "./utils.ts";
 
-export async function build() {
+export async function build(inputFile = "README.md") {
   console.log("Building site...");
-  const markdown = await Deno.readTextFile("./README.md");
+  const markdown = await Deno.readTextFile(inputFile);
   const html = await marked.parse(markdown);
 
   const currentDir = Deno.cwd();
