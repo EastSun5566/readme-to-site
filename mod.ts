@@ -23,11 +23,14 @@ readme-to-site v${denoJson.version}
 A simple static site generator that converts README.md to HTML
 
 USAGE:
-  r2s [COMMAND] [OPTIONS]
+  r2s [COMMAND] [INPUT] [OPTIONS]
 
 COMMANDS:
-  serve     Serve README.md converted result (default port: 5566)
+  serve     Serve the markdown file converted result (default port: 5566)
   build     Build static site to dist/index.html
+
+ARGUMENTS:
+  INPUT     Input markdown file (default: README.md)
 
 OPTIONS:
   -p, --port <PORT>    Port number for serve command
@@ -38,10 +41,13 @@ EXAMPLES:
   # Serve
   r2s
   r2s serve
+  r2s serve ME.md
   r2s serve --port 3000
+  r2s serve ME.md --port 3000
 
   # Build
   r2s build
+  r2s build ME.md
 `);
 }
 
@@ -57,14 +63,15 @@ async function main() {
   }
 
   const command = args._[0]?.toString() || "serve";
+  const inputFile = args._[1]?.toString();
   try {
     switch (command) {
       case "serve": {
-        serve(args.port as number);
+        serve(args.port as number, inputFile);
         break;
       }
       case "build": {
-        await build();
+        await build(inputFile);
         break;
       }
       default:
